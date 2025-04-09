@@ -37,7 +37,7 @@ function Navbar() {
         />
 
         <div className="group relative">
-          <Link to="/loging">
+          <Link to="/login">
             <img className="w-5 cursor-pointer" src={assets.profile_icon} />
           </Link>
           <div className="group-hover:block hidden absolute dropdown-menu  right-0 pt-4">
