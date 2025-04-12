@@ -216,7 +216,7 @@ const AddProduct = ({ token }) => {
         </div>
 
         <button
-          className="uppercase bg-black text-white px-3 py-3 rounded"
+          className="uppercase bg-black cursor-pointer text-white px-3 py-3 rounded"
           type="submit"
         >
           Add Product

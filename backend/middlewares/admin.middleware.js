@@ -5,6 +5,7 @@ import { errorResponse } from "../controllers/response.controller.js";
 const isAdmin = async (req, res, next) => {
   try {
     const { token } = req.headers;
+    debugger;
     if (!token) {
       return errorResponse(res, {
         statusCode: 404,

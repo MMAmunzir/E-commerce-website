@@ -6,7 +6,7 @@ import ListProducts from "./pages/ListProducts";
 import OrdersProduct from "./pages/OrdersProduct";
 import Sidebar from "./components/Sidebar";
 import Login from "./components/Login";
-export const serverURL = "https://forever-ecommerce-api.vercel.app";
+export const serverURL = "http://localhost:4000/api/product";
 const App = () => {
   const [token, setToken] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token") : ""
@@ -30,7 +30,10 @@ const App = () => {
                   path="/add-product"
                   element={<AddProduct token={token} />}
                 />
-                <Route path="/list-products" element={<ListProducts />} />
+                <Route
+                  path="/list-products"
+                  element={<ListProducts token={token} />}
+                />
                 <Route
                   path="/orders"
                   element={<OrdersProduct token={token} />}

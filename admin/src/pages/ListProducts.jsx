@@ -3,15 +3,33 @@ import React, { useEffect, useState } from "react";
 import { serverURL } from "../App";
 import toast from "react-hot-toast";
 
-const ListProducts = () => {
+const ListProducts = ({ token }) => {
   const [listProduct, setListProduct] = useState([]);
 
   const fetchListProducts = async () => {
     try {
-      const res = await axios.get(serverURL + "/api/product/all");
+      const res = await axios.get(serverURL + "/all");
 
       if (res.data.success) {
         setListProduct(res.data.payload);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(serverURL + "/" + id, {
+        headers: { token },
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        fetchListProducts();
+      } else {
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +62,10 @@ const ListProducts = () => {
             <p>{product.name}</p>
             <p>{product.category}</p>
             <p>{product.price}</p>
-            <p className="text-right md:text-center cursor-pointer text-lg">
+            <p
+              onClick={() => handleDelete(product._id)}
+              className="text-right md:text-center cursor-pointer text-lg"
+            >
               {" "}
               X
             </p>

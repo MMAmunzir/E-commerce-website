@@ -87,6 +87,7 @@ const handleAddProduct = async (req, res, next) => {
 const handleAllProducts = async (req, res, next) => {
   try {
     const products = await productModel.find();
+    // console.log(products);
 
     if (!products || products.length === 0) {
       throw createError(404, "No products found");
@@ -108,8 +109,7 @@ const handleRemoveProduct = async (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw createError(400, "Invalid mongoose id");
     }
-
-    const product = await productModel.findOneAndDelete(id);
+    const product = await productModel.findOneAndDelete({ _id: id });
 
     if (!product) {
       throw createError(404, "Product not found");
