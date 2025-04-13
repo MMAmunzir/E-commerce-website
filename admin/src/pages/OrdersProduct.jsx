@@ -9,12 +9,13 @@ const OrdersProduct = ({ token }) => {
 
   const fetchAllOrders = async () => {
     if (!token) {
+      toast.error("Token is missing");
       return null;
     }
 
     try {
       const res = await axios.get(serverURL + "/api/order/list", {
-        headers: { token },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.data.success) {
@@ -23,7 +24,7 @@ const OrdersProduct = ({ token }) => {
         toast.error("Something went wrong");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching orders:", error.response || error.message);
       toast.error(error.message);
     }
   };
@@ -33,7 +34,9 @@ const OrdersProduct = ({ token }) => {
       const res = await axios.put(
         serverURL + "/api/order/status",
         { orderId, status: e.target.value },
-        { headers: { token } }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       if (res.data.success) {

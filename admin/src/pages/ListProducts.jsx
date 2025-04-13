@@ -8,7 +8,7 @@ const ListProducts = ({ token }) => {
 
   const fetchListProducts = async () => {
     try {
-      const res = await axios.get(serverURL + "/all");
+      const res = await axios.get(serverURL + "/api/product/all");
 
       if (res.data.success) {
         setListProduct(res.data.payload);
@@ -21,8 +21,8 @@ const ListProducts = ({ token }) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(serverURL + "/" + id, {
-        headers: { token },
+      const res = await axios.delete(serverURL + "/api/product/" + id, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.data.success) {

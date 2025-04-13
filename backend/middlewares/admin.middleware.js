@@ -4,8 +4,15 @@ import { errorResponse } from "../controllers/response.controller.js";
 
 const isAdmin = async (req, res, next) => {
   try {
-    const { token } = req.headers;
-    debugger;
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return errorResponse(res, {
+        statusCode: 404,
+        message: "Token not found",
+      });
+    }
+
+    const token = authHeader.split(" ")[1]; // Extract the token
     if (!token) {
       return errorResponse(res, {
         statusCode: 404,

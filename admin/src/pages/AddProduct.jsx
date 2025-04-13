@@ -56,8 +56,8 @@ const AddProduct = ({ token }) => {
       appendData.append("bestseller", productData.bestseller);
       appendData.append("sizes", JSON.stringify(productData.sizes));
 
-      const res = await axios.post(serverURL + "/add", appendData, {
-        headers: { token },
+      const res = await axios.post(serverURL + "/api/product/add", appendData, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.data.success) {
