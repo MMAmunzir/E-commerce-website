@@ -57,7 +57,7 @@ const AddProduct = ({ token }) => {
       appendData.append("sizes", JSON.stringify(productData.sizes));
 
       const res = await axios.post(
-        process.meta.env.VITE_BACKEND_URL + "/api/product/add",
+        import.meta.env.VITE_BACKEND_URL + "/api/product/add",
         appendData,
         {
           headers: { Authorization: `Bearer ${token}` },

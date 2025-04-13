@@ -9,7 +9,7 @@ const ListProducts = ({ token }) => {
   const fetchListProducts = async () => {
     try {
       const res = await axios.get(
-        process.meta.env.VITE_BACKEND_URL + "/api/product/all"
+        import.meta.env.VITE_BACKEND_URL + "/api/product/all"
       );
 
       if (res.data.success) {
@@ -24,7 +24,7 @@ const ListProducts = ({ token }) => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        process.meta.env.VITE_BACKEND_URL + "/api/product/" + id,
+        import.meta.env.VITE_BACKEND_URL + "/api/product/" + id,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

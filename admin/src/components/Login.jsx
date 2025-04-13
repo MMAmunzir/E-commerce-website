@@ -13,7 +13,7 @@ const Login = ({ setToken }) => {
 
     try {
       const res = await axios.post(
-        process.meta.env.VITE_BACKEND_URL + "/api/user/admin",
+        import.meta.env.VITE_BACKEND_URL + "/api/user/admin",
         data
       );
 

@@ -15,7 +15,7 @@ const OrdersProduct = ({ token }) => {
 
     try {
       const res = await axios.get(
-        process.meta.env.VITE_BACKEND_URL + "/api/order/list",
+        import.meta.env.VITE_BACKEND_URL + "/api/order/list",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -35,7 +35,7 @@ const OrdersProduct = ({ token }) => {
   const handleStatus = async (e, orderId) => {
     try {
       const res = await axios.put(
-        process.meta.env.VITE_BACKEND_URL + "/api/order/status",
+        import.meta.env.VITE_BACKEND_URL + "/api/order/status",
         { orderId, status: e.target.value },
         {
           headers: { Authorization: `Bearer ${token}` },
