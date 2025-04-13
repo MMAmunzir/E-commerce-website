@@ -1,5 +1,4 @@
 import express from "express";
-// import isAdmin from "../middlewares/admin.middleware.js";
 import isAdmin from "./../middlewares/admin.middleware.js";
 import {
   getAllOrders,
@@ -25,6 +24,6 @@ orderRouter.post("/stripe", isAuthorized, placeOrderStripe);
 orderRouter.get("/user-orders", isAuthorized, userOrders);
 
 //verify payment
-orderRouter.post("/verify-stripe", isAuthorized, verifyStripePayment);
+orderRouter.post("/verify", isAuthorized, verifyStripePayment);
 
 export default orderRouter;

@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const VerifyPayment = () => {
-  const { navigate, token, setCartItems, serverURL } = useContext(ShopContext);
+  const { navigate, token, setCartItems, backendUrl } = useContext(ShopContext);
   const [searchParams] = useSearchParams();
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
@@ -17,7 +17,7 @@ const VerifyPayment = () => {
       }
 
       const res = await axios.post(
-        serverURL + "/api/order/verify-stripe",
+        backendUrl + "/api/order/verify",
         { success, orderId },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -40,13 +40,13 @@ const VerifyPayment = () => {
     handleVerifyPayment();
   }, [token]);
 
-  if (success === "false") {
-    setTimeout(() => {
-      navigate("/cart");
-    }, 3000);
-  } else {
-    navigate("/orders");
-  }
+  // if (success === "false") {
+  //   setTimeout(() => {
+  //     navigate("/cart");
+  //   }, 3000);
+  // } else {
+  //   navigate("/orders");
+  // }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="verify w-12 h-12 rounded-full border-2 border-gray-700">
