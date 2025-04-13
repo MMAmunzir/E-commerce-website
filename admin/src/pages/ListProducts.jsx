@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { serverURL } from "../App";
+// import { serverURL } from "../App";
 import toast from "react-hot-toast";
 
 const ListProducts = ({ token }) => {
@@ -8,7 +8,9 @@ const ListProducts = ({ token }) => {
 
   const fetchListProducts = async () => {
     try {
-      const res = await axios.get(serverURL + "/api/product/all");
+      const res = await axios.get(
+        process.meta.env.VITE_BACKEND_URL + "/api/product/all"
+      );
 
       if (res.data.success) {
         setListProduct(res.data.payload);
@@ -21,9 +23,12 @@ const ListProducts = ({ token }) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(serverURL + "/api/product/" + id, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.delete(
+        process.meta.env.VITE_BACKEND_URL + "/api/product/" + id,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (res.data.success) {
         toast.success(res.data.message);

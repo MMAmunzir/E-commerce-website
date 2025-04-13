@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 const Login = ({ setToken }) => {
-  const serverURL = "http://localhost:4000/api/user";
+  // const serverURL = "http://localhost:4000/api/user";
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -12,7 +12,10 @@ const Login = ({ setToken }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(serverURL + "/admin", data);
+      const res = await axios.post(
+        process.meta.env.VITE_BACKEND_URL + "/api/user/admin",
+        data
+      );
 
       if (res.data.success) {
         setToken(res.data.payload);

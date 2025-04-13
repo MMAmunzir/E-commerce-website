@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { assets } from "../assets/admin_assets/assets";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { serverURL } from "../App";
+// import { serverURL } from "../App";
 
 const AddProduct = ({ token }) => {
   const [productData, setProductData] = useState({
@@ -56,9 +56,13 @@ const AddProduct = ({ token }) => {
       appendData.append("bestseller", productData.bestseller);
       appendData.append("sizes", JSON.stringify(productData.sizes));
 
-      const res = await axios.post(serverURL + "/api/product/add", appendData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.post(
+        process.meta.env.VITE_BACKEND_URL + "/api/product/add",
+        appendData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (res.data.success) {
         setProductData({

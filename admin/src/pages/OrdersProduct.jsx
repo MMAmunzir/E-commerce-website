@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { serverURL } from "../App";
+// import { serverURL } from "../App";
 import toast from "react-hot-toast";
 import { assets } from "../assets/admin_assets/assets";
 
@@ -14,9 +14,12 @@ const OrdersProduct = ({ token }) => {
     }
 
     try {
-      const res = await axios.get(serverURL + "/api/order/list", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        process.meta.env.VITE_BACKEND_URL + "/api/order/list",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (res.data.success) {
         setOrders(res.data.payload.reverse());
@@ -32,7 +35,7 @@ const OrdersProduct = ({ token }) => {
   const handleStatus = async (e, orderId) => {
     try {
       const res = await axios.put(
-        serverURL + "/api/order/status",
+        process.meta.env.VITE_BACKEND_URL + "/api/order/status",
         { orderId, status: e.target.value },
         {
           headers: { Authorization: `Bearer ${token}` },
